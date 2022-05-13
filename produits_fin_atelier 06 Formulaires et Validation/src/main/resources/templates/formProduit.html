@@ -43,7 +43,7 @@
        					
        					<div class="form-group">
 							<label class="control-label">Categorie :</label> 
-							<select    type="text" name="categorie" class="form-control" th:value="${produit.categorie.idCat}"  >
+							<select     name="categorie" class="form-control" th:value="${produit.categorie.idCat}"   th:if= "${!#strings.isEmpty(produit.categorie)}" >
 								<option th:each="c:${categories}" th:if="${mode=='edit'}"
 									th:value="${c.idCat}" th:text="${c.nomCat}"
 									th:selected="${ c.idCat==produit.categorie.idCat}"></option>
@@ -51,6 +51,13 @@
 								<option th:each="c:${categories}" th:if="${mode=='new'}"
 									th:value="${c.idCat}" th:text="${c.nomCat}"></option>
 							</select>
+							
+						
+						<!-- Pour ne pas avoir d'erreurs si la catégorie est null on ajoute ce select -->
+							<select     name="categorie" class="form-control"    th:if= "${#strings.isEmpty(produit.categorie)}" >
+								<option th:each="c:${categories}" th:value="${c.idCat}" th:text="${c.nomCat}"></option>
+							</select>
+							
 						</div>
 
 
